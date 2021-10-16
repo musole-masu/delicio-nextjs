@@ -1,21 +1,86 @@
 import { Fragment } from "react";
 import Link from "next/link";
-
-const Meals = () => {
+import MealList from "../../components/meals/MealList";
+const DUMMY_MEALS = [
+  {
+    id: "meal1",
+    title: "Red coconut curry",
+    chef: "Henrica Doco",
+    image_dish: "/meals/baiq-daling-meal%237.PNG",
+    image_full: "/meals/baiq-daling-meal%237.JPG",
+    dishes: 4,
+    description:
+      "Red curry, black rice, colorful vegetables and delicious chicken breast. We love variety of colors and good food. And good food does not need any additives. Therefore, our coconut curry sauce consists only of natural ingredients such as coconut milk, red chilies, lemongrass, kaffir lime leaves, bananas and mangoes (so that it is not quite as spicy).",
+  },
+  {
+    id: "meal2",
+    title: "Chicken Tajine",
+    chef: "Henrica Doco",
+    image_dish: "/meals/khloe-arledge-meal%235.PNG",
+    image_full: "/meals/khloe-arledge-meal%235.JPG",
+    dishes: 2,
+    description:
+      "A culinary trip to Morocco. An aromatic tomato and vegetable tajine with oriental spices, chicken breast and fruity apricot bulgur with roasted cashews.",
+  },
+  {
+    id: "meal3",
+    title: "Chicken Tajine",
+    chef: "Henrica Doco",
+    image_dish: "/meals/eiliv-sonas-aceron-meal%233.PNG",
+    image_full: "/meals/eiliv-sonas-aceron-meal%233.JPG",
+    dishes: 2,
+    description:
+      "A culinary trip to Morocco. An aromatic tomato and vegetable tajine with oriental spices, chicken breast and fruity apricot bulgur with roasted cashews.",
+  },
+  {
+    id: "meal4",
+    title: "Chicken Tajine",
+    chef: "Henrica Doco",
+    image_dish: "/meals/mariana-medvedeva-meal%234.PNG",
+    image_full: "/meals/mariana-medvedeva-meal%234.JPG",
+    dishes: 2,
+    description:
+      "A culinary trip to Morocco. An aromatic tomato and vegetable tajine with oriental spices, chicken breast and fruity apricot bulgur with roasted cashews.",
+  },
+];
+const Meals = (props) => {
   return (
     <Fragment>
-      <h1>LISTES OF MEALS BY CHEFS</h1>
-      <ul>
-        <li>
-          <Link href="/meals/salad_au_canard">
-            <h3>Salad de Canard</h3>
-          </Link>
-          <Link href="/meals/salad_au_poulet">
-            <h3>Salad de Poulet</h3>
-          </Link>
-        </li>
-      </ul>
+      <div className="text-center">
+        <h1 className="font-light text-4xl">
+          The most delicious food in your town.
+        </h1>
+        <br />
+        <h2 className="text-gray-700 text-2xl font-light">
+          New dishes every week, created by our nutritionists and cooked by our
+          chefs just for you.
+        </h2>
+      </div>
+      <div className="flex flex-row space-x-12 mt-20">
+        <MealList meals={props.meals} />
+      </div>
     </Fragment>
   );
 };
+
+// export async function getServerSideProps(context) {
+//   const req = context.req;
+//   const res = context.res;
+//   // fecth data from API
+//   return {
+//     props: {
+//       meals: DUMMY_MEALS,
+//     },
+//   };
+// }
+
+export async function getStaticProps() {
+  // fetch data from an API
+  return {
+    props: {
+      meals: DUMMY_MEALS,
+    },
+    revalidate: 1,
+  };
+}
 export default Meals;

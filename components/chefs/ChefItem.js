@@ -1,23 +1,22 @@
 import { useRouter } from "next/router";
-const MealItem = ({ meal }) => {
+const ChefItem = ({ chef }) => {
   const router = useRouter();
 
-  const showMealDetailHandler = () => {
-    router.push("/meals/" + meal.id);
+  const showChefDetailHandler = () => {
+    router.push("/chefs/" + chef.id);
   };
   return (
     <div className="w-3/12  place-items-center space-y-4">
-      <img src={meal.image_dish} className=" w-auto h-auto" alt={meal.title} />
+      <img src={chef.image_full} className="w-auto h-auto" alt={chef.chef} />
       <div className="text-center">
         <h3 className="text-xl font-normal">
-          {meal.title}{" "}
+          {chef.chef}{" "}
           <span className="px-3 font-light text-yellow-500">
-            ({meal.dishes})
+            ({chef.rates})
           </span>
         </h3>
-        <p className="text-gray-500 text-base">{meal.chef}</p>
         <button
-          onClick={showMealDetailHandler}
+          onClick={showChefDetailHandler}
           className="bg-yellow-500 px-4 py-2 rounded-lg text-gray-50 font-medium mt-2"
         >
           Details
@@ -26,4 +25,4 @@ const MealItem = ({ meal }) => {
     </div>
   );
 };
-export default MealItem;
+export default ChefItem;

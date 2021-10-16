@@ -4,8 +4,10 @@ import MainNavigation from "./MainNavigation";
 const Layout = (props) => {
   return (
     <Fragment>
-      <MainNavigation />
-      <main>{props.children}</main>
+      <div className="relative h-full">
+        <MainNavigation />
+        <main className="w-full max-w-7xl mx-auto py-40">{props.children}</main>
+      </div>
     </Fragment>
   );
 };

@@ -4,12 +4,12 @@
 @tailwind utilities;
 
 @layer base {
-  h1 {
+  /* h1 {
     @apply text-2xl;
   }
   h2 {
     @apply text-xl;
-  }
+  } */
   @font-face {
     font-family: Proxima Nova;
     src: url(/fonts/Proxima Nova Font.otf) format("oft");

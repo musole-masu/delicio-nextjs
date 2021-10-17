@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { MongoClient } from "mongodb";
+import "dotenv/config";
 import MealList from "../../components/meals/MealList";
 const DUMMY_MEALS = [
   {
@@ -76,9 +77,11 @@ const Meals = (props) => {
 
 export async function getStaticProps() {
   // fetch data from an API
+  const MONGODB_USERNAME = process.env.mongoDbUserName;
+  const MONGODB_USER_PASSWORD = process.env.mongoDbUserPassword;
 
   const client = await MongoClient.connect(
-    "mongodb+srv://musolemasu:1gwiMZRkiDBfecdx@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority"
+    `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_USER_PASSWORD}@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority`
   );
 
   const db = client.db();

@@ -1,3 +1,4 @@
+import "dotenv/config";
 const DUMMY_CHEFS = [
   {
     id: "chef1",

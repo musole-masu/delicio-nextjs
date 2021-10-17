@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Link from "next/link";
+import { MongoClient } from "mongodb";
 import MealList from "../../components/meals/MealList";
 const DUMMY_MEALS = [
   {
@@ -76,9 +76,29 @@ const Meals = (props) => {
 
 export async function getStaticProps() {
   // fetch data from an API
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://musolemasu:1gwiMZRkiDBfecdx@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority"
+  );
+
+  const db = client.db();
+
+  const mealsCollection = db.collection("meals");
+  const meals = await mealsCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meals: DUMMY_MEALS,
+      meals: meals.map((meal) => ({
+        title: meal.meal_name,
+        description: meal.meal_description,
+        image_full: meal.meal_full_img,
+        image_dish: meal.meal_dish_img,
+        dishes: meal.number_of_dish,
+        chef: meal.chef,
+        id: meal._id.toString(),
+      })),
     },
     revalidate: 1,
   };

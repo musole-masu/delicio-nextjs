@@ -2,7 +2,10 @@ import Meal from "../../pages/meals/[mealId]";
 
 const MealDetail = (props) => {
   const mealIngredient = props.ingredients.map((ingredient) => (
-    <span className="font-normal text-gray-700 border border-yellow-500 px-4 py-2 rounded-md">
+    <span
+      className="font-normal text-gray-700 border border-yellow-500 px-4 py-2 rounded-md"
+      key={ingredient.index}
+    >
       {ingredient}
     </span>
   ));

@@ -6,7 +6,7 @@ const MealItem = ({ meal }) => {
     router.push("/meals/" + meal.id);
   };
   return (
-    <div className="w-3/12  place-items-center space-y-4">
+    <div className="w-3/12  place-items-center space-y-2">
       <img src={meal.image_dish} className=" w-auto h-auto" alt={meal.title} />
       <div className="text-center">
         <h3 className="text-xl font-normal">

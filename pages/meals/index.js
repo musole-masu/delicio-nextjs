@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { MongoClient } from "mongodb";
-import "dotenv/config";
 import MealList from "../../components/meals/MealList";
+import Head from "next/head";
 const DUMMY_MEALS = [
   {
     id: "meal1",
@@ -47,6 +47,14 @@ const DUMMY_MEALS = [
 const Meals = (props) => {
   return (
     <Fragment>
+      <Head>
+        <title>Meals - Discover Our Dishes</title>
+        <meta
+          name="description"
+          content="New dishes every week, created by our nutritionists and cooked by our
+          chefs just for you."
+        />
+      </Head>
       <div className="text-center">
         <h1 className="font-light text-4xl">
           The most delicious food in your town.
@@ -77,11 +85,9 @@ const Meals = (props) => {
 
 export async function getStaticProps() {
   // fetch data from an API
-  const MONGODB_USERNAME = process.env.mongoDbUserName;
-  const MONGODB_USER_PASSWORD = process.env.mongoDbUserPassword;
 
   const client = await MongoClient.connect(
-    `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_USER_PASSWORD}@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.mongoDbUserName}:${process.env.mongoDbUserPassword}@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority`
   );
 
   const db = client.db();

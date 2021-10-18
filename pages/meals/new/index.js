@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import NewMealForm from "../../../components/meals/NewMealForm";
+import { Fragment } from "react";
+import Head from "next/head";
 const NewMeals = () => {
   const router = useRouter();
   async function addNewMealHandler(enteredMealData) {
@@ -16,6 +18,14 @@ const NewMeals = () => {
     console.log(data);
     router.replace("/meals");
   }
-  return <NewMealForm onAddNewMeal={addNewMealHandler} />;
+  return (
+    <Fragment>
+      <Head>
+        <title>Add new meal</title>
+        <meta name="description" content="Add new meal" />
+      </Head>
+      <NewMealForm onAddNewMeal={addNewMealHandler} />
+    </Fragment>
+  );
 };
 export default NewMeals;

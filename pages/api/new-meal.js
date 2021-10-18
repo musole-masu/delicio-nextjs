@@ -7,7 +7,7 @@ async function handler(req, res) {
     // 1gwiMZRkiDBfecdx
     try {
       const client = await MongoClient.connect(
-        "mongodb+srv://musolemasu:1gwiMZRkiDBfecdx@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority"
+        `mongodb+srv://${process.env.mongoDbUserName}:${process.env.mongoDbUserPassword}@delicio.d7fro.mongodb.net/delicio?retryWrites=true&w=majority`
       );
       const db = client.db();
 

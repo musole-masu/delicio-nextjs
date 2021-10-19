@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { Fragment } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import MealList from "../components/meals/MealList";
 import ChefList from "../components/chefs/ChefList";
@@ -79,16 +80,27 @@ const DUMMY_MEALS = [
       "A culinary trip to Morocco. An aromatic tomato and vegetable tajine with oriental spices, chicken breast and fruity apricot bulgur with roasted cashews.",
   },
 ];
+const MEAL_CATEGORY = [
+  "All Dishes",
+  "New",
+  "High Protein",
+  "Lower Carb",
+  "<450 kcal",
+  "Vegetarian",
+  "Vegan",
+];
 const HomePage = (props) => {
-  const MEAL_CATEGORY = [
-    "All Dishes",
-    "New",
-    "High Protein",
-    "Lower Carb",
-    "<450 kcal",
-    "Vegetarian",
-    "Vegan",
-  ];
+  const [selectedMealCat, setSelectedMealCat] = useState("");
+
+  useEffect(() => {
+    setSelectedMealCat("High Protein");
+  }, []);
+
+  const filterMealByCatHandler = (event) => {
+    const selectedCategory = event.target.dataset.mssg;
+    setSelectedMealCat(selectedCategory);
+  };
+
   return (
     <Fragment>
       <Head>
@@ -114,8 +126,14 @@ const HomePage = (props) => {
         <div className="flex flex-row mx-auto space-x-5 mt-10">
           {MEAL_CATEGORY.map((category) => (
             <span
-              className="font-normal text-gray-700 border border-yellow-500 px-4 py-1 rounded-md hover:text-gray-50 hover:bg-yellow-500 cursor-pointer"
+              className={`font-normal  border border-yellow-500 px-4 py-1 rounded-md hover:text-gray-50 hover:bg-yellow-500 cursor-pointer ${
+                selectedMealCat === category
+                  ? "bg-yellow-500 text-gray-50"
+                  : "text-gray-700"
+              }`}
+              data-mssg={category}
               key={category}
+              onClick={filterMealByCatHandler}
             >
               {category}
             </span>

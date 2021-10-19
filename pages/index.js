@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import { Fragment } from "react";
 import Head from "next/head";
 import MealList from "../components/meals/MealList";
+import ChefList from "../components/chefs/ChefList";
 const DUMMY_CHEFS = [
   {
     id: "chef1",
@@ -14,7 +15,7 @@ const DUMMY_CHEFS = [
   {
     id: "chef2",
     chef: "Henrica Doco",
-    image_full: "/chefs/dahiana-waszaj-cookChef%232.PNG",
+    image_full: "/chefs/petr-sevcovic-cookChef%233.PNG",
     rates: 4,
     description:
       "We love variety of colors and good food. And good food does not need any additives.",
@@ -22,7 +23,7 @@ const DUMMY_CHEFS = [
   {
     id: "chef3",
     chef: "Henrica Doco",
-    image_full: "/chefs/dahiana-waszaj-cookChef%232.PNG",
+    image_full: "/chefs/jeff-siepman-cookChef%231.PNG",
     rates: 4,
     description:
       "We love variety of colors and good food. And good food does not need any additives.",
@@ -123,6 +124,18 @@ const HomePage = (props) => {
         <div className="flex flex-row space-x-12 mt-20">
           <MealList meals={props.meals} />
         </div>
+        <div className="text-center mt-20">
+          <h1 className="font-bold text-5xl text-gray-600">Our Food Team. </h1>
+
+          <p className="text-gray-700 text-xl font-light  mt-5">
+            They use high quality, natural ingredients from selected suppliers -
+            and never any flavorings, preservatives, flavor enhancers or other
+            additives.
+          </p>
+        </div>
+        <div className="flex flex-row space-x-12 mt-20">
+          <ChefList chefs={props.chefs} />{" "}
+        </div>
       </div>
     </Fragment>
   );
@@ -148,6 +161,7 @@ export async function getStaticProps() {
         chef: meal.chef,
         id: meal._id.toString(),
       })),
+      chefs: DUMMY_CHEFS,
     },
   };
 }

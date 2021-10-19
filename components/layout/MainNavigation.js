@@ -27,13 +27,13 @@ const MainNavigation = () => {
               </div>
             </div>
             <div className="flex items-center space-x-10">
-              <Link href="/login">
-                <span className="font-light text-base text-gray-800">
+              <Link href="/auth/login">
+                <span className="font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500">
                   LOGIN
                 </span>
               </Link>
-              <Link href="/login">
-                <span className="font-light text-base text-gray-800">
+              <Link href="/auth/signup">
+                <span className="font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500">
                   SIGN UP
                 </span>
               </Link>

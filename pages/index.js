@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { Fragment } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Head from "next/head";
 import MealList from "../components/meals/MealList";
 import ChefList from "../components/chefs/ChefList";
@@ -89,16 +89,46 @@ const MEAL_CATEGORY = [
   "Vegetarian",
   "Vegan",
 ];
+const mealsFilterReduder = (state, action) => {
+  if (action.type === "ALL DISHES") {
+    return { mealCategory: action.type, meals: action.value };
+  }
+  if (action.type === "HIGH PROTEIN") {
+    return { mealCategory: action.type, meals: action.value };
+  }
+  if (action.type === "LOWER CARB") {
+    return { mealCategory: action.type, meals: action.value };
+  }
+  if (action.type === "<450 KCAL") {
+    return { mealCategory: action.type, meals: action.value };
+  }
+  if (action.type === "VEGAN") {
+    return { mealCategory: action.type, meals: action.value };
+  }
+  if (action.type === "VEGETARIAN") {
+    return { mealCategory: action.type, meals: action.value };
+  }
+};
 const HomePage = (props) => {
   const [selectedMealCat, setSelectedMealCat] = useState("");
 
   useEffect(() => {
-    setSelectedMealCat("High Protein");
+    setSelectedMealCat("All Dishes");
   }, []);
+
+  const [mealsState, dispatchMeal] = useReducer(mealsFilterReduder, {
+    mealCategory: "All Dishes",
+    meals: props.meals,
+  });
 
   const filterMealByCatHandler = (event) => {
     const selectedCategory = event.target.dataset.mssg;
     setSelectedMealCat(selectedCategory);
+
+    dispatchMeal({
+      type: selectedCategory.toUpperCase(),
+      value: props.meals.filter((meal) => meal.category === selectedCategory),
+    });
   };
 
   return (
@@ -140,7 +170,7 @@ const HomePage = (props) => {
           ))}
         </div>
         <div className="flex flex-row space-x-12 mt-20">
-          <MealList meals={props.meals} />
+          <MealList meals={mealsState.meals} />
         </div>
         <div className="text-center mt-20">
           <h1 className="font-bold text-5xl text-gray-600">Our Food Team. </h1>
@@ -177,6 +207,7 @@ export async function getStaticProps() {
         image_dish: meal.meal_dish_img,
         dishes: meal.number_of_dish,
         chef: meal.chef,
+        category: meal.category,
         id: meal._id.toString(),
       })),
       chefs: DUMMY_CHEFS,

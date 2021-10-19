@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 const MainNavigation = () => {
+  const router = useRouter();
   return (
     <div className="relative md:fixed w-full">
       <nav className="bg-white shadow-md py-4">
@@ -15,12 +17,24 @@ const MainNavigation = () => {
               </div>
               <div className="flex items-center space-x-10">
                 <Link href="/meals">
-                  <span className="font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500">
+                  <span
+                    className={`font-light text-base cursor-pointer hover:text-yellow-500 ${
+                      router.pathname === "/meals"
+                        ? "text-yellow-500 font-normal"
+                        : "text-gray-800"
+                    }`}
+                  >
                     OUR MEALS
                   </span>
                 </Link>
                 <Link href="/chefs">
-                  <span className="font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500">
+                  <span
+                    className={`font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500 ${
+                      router.pathname === "/chefs"
+                        ? "text-yellow-500 font-normal"
+                        : "text-gray-800"
+                    }`}
+                  >
                     OUR CHEFS
                   </span>
                 </Link>
@@ -28,12 +42,24 @@ const MainNavigation = () => {
             </div>
             <div className="flex items-center space-x-10">
               <Link href="/auth/login">
-                <span className="font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500">
+                <span
+                  className={`font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500 ${
+                    router.pathname === "/auth/login"
+                      ? "text-yellow-500 font-normal"
+                      : "text-gray-800"
+                  }`}
+                >
                   LOGIN
                 </span>
               </Link>
               <Link href="/auth/signup">
-                <span className="font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500">
+                <span
+                  className={`font-light text-base text-gray-800 cursor-pointer hover:text-yellow-500 ${
+                    router.pathname === "/auth/signup"
+                      ? "text-yellow-500 font-normal"
+                      : "text-gray-800"
+                  }`}
+                >
                   SIGN UP
                 </span>
               </Link>
